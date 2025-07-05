@@ -1,0 +1,158 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Enums for PostgreSQL
+enum UserRole {
+  USER
+  ADMIN
+  SUPER_ADMIN
+}
+
+enum UserStatus {
+  ACTIVE
+  INACTIVE
+  SUSPENDED
+  PENDING_VERIFICATION
+}
+
+enum ProjectStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+  FEATURED
+}
+
+enum ProjectCategory {
+  DEFI
+  NFT
+  GAMING
+  METAVERSE
+  AI
+  INFRASTRUCTURE
+  OTHER
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  firstName String?
+  lastName  String?
+  role      UserRole @default(USER)
+  status    UserStatus @default(PENDING_VERIFICATION)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  lastLogin DateTime?
+  
+  // Email verification
+  emailVerified Boolean @default(false)
+  verificationToken String?
+  
+  // Password reset
+  resetToken String?
+  resetTokenExpiry DateTime?
+  
+  // Relations
+  projects Project[]
+  
+  @@map("users")
+}
+
+model Project {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  
+  // Project details
+  website     String?
+  repository  String?
+  
+  // Project status and categorization
+  status      ProjectStatus @default(DRAFT)
+  category    ProjectCategory @default(OTHER)
+  visibility  String @default("PRIVATE") // PUBLIC, PRIVATE
+  
+  // Images and media
+  imageUrl    String?
+  
+  // Timestamps
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  publishedAt DateTime?
+  
+  // Relations
+  ownerId     String
+  owner       User @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  
+  @@map("projects")
+}
+
+// Admin Users - Separate from regular users for security
+model AdminUser {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  firstName String
+  lastName  String
+  role      String @default("ADMIN")
+  status    UserStatus @default(ACTIVE)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  lastLogin DateTime?
+  
+  // Admin specific fields
+  permissions String? // JSON string of permissions array
+  department String?
+  
+  @@map("admin_users")
+}
+
+// User Sessions for JWT management
+model UserSession {
+  id           String   @id @default(cuid())
+  userId       String
+  refreshToken String   @unique
+  expiresAt    DateTime
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  
+  @@map("user_sessions")
+}
+
+// Audit Log for tracking important actions
+model AuditLog {
+  id        String   @id @default(cuid())
+  userId    String?
+  action    String
+  resource  String
+  resourceId String?
+  details   Json?
+  ipAddress String?
+  userAgent String?
+  createdAt DateTime @default(now())
+  
+  @@map("audit_logs")
+}
+
+// User Roles and Permissions
+model UserRolePermission {
+  id          String   @id @default(cuid())
+  name        String   @unique
+  description String?
+  permissions Json     // JSON array of permissions
+  
+  // Timestamps
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  @@map("user_role_permissions")
+}
