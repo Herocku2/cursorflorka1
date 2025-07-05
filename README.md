@@ -1,37 +1,15 @@
-# CursorFlorka1 SaaS Platform
+# 🚀 CursorFlorka1 SaaS Platform
 
-Una plataforma SaaS moderna y escalable construida con React, Node.js, TypeScript y PostgreSQL. Esta aplicación proporciona un sistema completo de autenticación de usuarios, gestión de proyectos y panel de administración.
+**CursorFlorka1** es un clon completo de la plataforma SaaS Florka, construida con tecnologías modernas y configurada con puertos únicos para evitar conflictos con el proyecto original.
 
-**🔄 Este es un clon completo del proyecto Florka SaaS Platform con configuraciones modificadas para evitar conflictos de puertos.**
+## 📋 Descripción del Proyecto
 
-## 🚀 Características Principales
-
-### Autenticación y Autorización
-- ✅ Registro de usuarios con validación de email
-- ✅ Inicio de sesión seguro con JWT
-- ✅ Gestión de sesiones con refresh tokens
-- ✅ Protección de rutas basada en roles
-- ✅ Panel de administración con permisos especiales
-
-### Gestión de Proyectos
-- ✅ Crear, editar y eliminar proyectos
-- ✅ Control de visibilidad (público/privado)
-- ✅ Estados de proyecto (borrador/publicado/archivado)
-- ✅ Búsqueda y filtrado avanzado
-- ✅ Paginación optimizada
-
-### Panel de Administración
-- ✅ Dashboard con estadísticas en tiempo real
-- ✅ Gestión completa de usuarios
-- ✅ Administración de proyectos
-- ✅ Control de estados y permisos
-
-### Seguridad y Buenas Prácticas
-- ✅ Hasheo de contraseñas con bcrypt
-- ✅ Validación de entrada con Zod
-- ✅ Rate limiting en endpoints críticos
-- ✅ Headers de seguridad con Helmet
-- ✅ Variables de entorno para configuración sensible
+Esta es una aplicación web SaaS completa que incluye:
+- Sistema de autenticación de usuarios
+- Gestión de proyectos
+- Panel de administración
+- API RESTful robusta
+- Interfaz de usuario moderna y responsiva
 
 ## 🛠️ Stack Tecnológico
 
@@ -41,203 +19,194 @@ Una plataforma SaaS moderna y escalable construida con React, Node.js, TypeScrip
 - **Tailwind CSS** para estilos
 - **React Router** para navegación
 - **Zustand** para gestión de estado
-- **Axios** para llamadas HTTP
+- **Axios** para peticiones HTTP
 
 ### Backend
 - **Node.js** con TypeScript
-- **Express.js** como framework web
+- **Express.js** como framework
 - **Prisma** como ORM
 - **PostgreSQL** como base de datos
 - **JWT** para autenticación
-- **bcrypt** para hasheo de contraseñas
+- **bcrypt** para hash de contraseñas
 
-### DevOps y Herramientas
-- **Docker** y **Docker Compose** para contenerización
-- **ESLint** y **Prettier** para calidad de código
-- **Jest** y **Supertest** para testing del backend
-- **Vitest** y **React Testing Library** para testing del frontend
+### DevOps
+- **Docker** y **Docker Compose**
+- **ESLint** y **Prettier**
+- **Jest** y **Vitest** para testing
 
-## 🚀 Inicio Rápido
+## 🔧 Configuración de Puertos (Modificados)
+
+Para evitar conflictos con el proyecto original, CursorFlorka1 utiliza puertos diferentes:
+
+| Servicio | Puerto Original | Puerto CursorFlorka1 |
+|----------|----------------|----------------------|
+| Frontend | 5173 | **5174** |
+| Backend | 3000 | **3001** |
+| PostgreSQL | 5432 | **5433** |
+
+## 🚀 Instalación y Ejecución
 
 ### Prerrequisitos
-- Node.js 18+ 
-- Docker y Docker Compose
+- Docker y Docker Compose instalados
 - Git
 
-### Instalación
+### Pasos de Instalación
 
-1. **Clonar el repositorio**
-   ```bash
-   git clone https://github.com/Herocku2/cursorflorka1.git
-   cd cursorflorka1
-   ```
+1. **Clonar el repositorio:**
+```bash
+git clone https://github.com/Herocku2/cursorflorka1.git
+cd cursorflorka1
+```
 
-2. **Configurar variables de entorno**
-   ```bash
-   # Backend
-   cp backend/.env.example backend/.env
-   # Editar backend/.env con tus configuraciones
-   ```
+2. **Ejecutar con Docker Compose:**
+```bash
+docker-compose up --build
+```
 
-3. **Levantar la aplicación con Docker**
-   ```bash
-   docker-compose up --build
-   ```
+3. **Acceder a la aplicación:**
+- **Frontend:** http://localhost:5174
+- **Backend API:** http://localhost:3001
+- **Health Check:** http://localhost:3001/health
 
-4. **Acceder a la aplicación**
-   - Frontend: http://localhost:5174
-   - Backend API: http://localhost:3001
-   - Base de datos: localhost:5433
+## 🔐 Credenciales por Defecto
 
-### ⚠️ Diferencias con el Proyecto Original
+### Usuario Administrador
+- **Email:** admin@cursorflorka1.com
+- **Contraseña:** admin123
 
-**Puertos Modificados:**
-- Frontend: `5174` (original: 5173)
-- Backend: `3001` (original: 3000)
-- PostgreSQL: `5433` (original: 5432)
-
-**Nombres de Contenedores:**
-- `cursorflorka1_frontend` (original: florka_frontend)
-- `cursorflorka1_backend` (original: florka_backend)
-- `cursorflorka1_postgres` (original: florka_postgres)
-
-**Base de Datos:**
-- Nombre: `cursorflorka1_db` (original: florka_db)
-- Usuario: `cursorflorka1_user` (original: florka_user)
-- Red: `cursorflorka1_network` (original: florka_network)
-- Subnet: `172.21.0.0/16` (original: 172.20.0.0/16)
-
-### Configuración Manual (Desarrollo)
-
-Si prefieres ejecutar sin Docker:
-
-1. **Instalar dependencias**
-   ```bash
-   # Backend
-   cd backend
-   npm install
-   
-   # Frontend
-   cd ../frontend
-   npm install
-   ```
-
-2. **Configurar base de datos**
-   ```bash
-   cd backend
-   npx prisma migrate dev
-   npx prisma generate
-   ```
-
-3. **Crear usuario administrador**
-   ```bash
-   cd backend
-   node create-admin.js
-   ```
-
-4. **Ejecutar en modo desarrollo**
-   ```bash
-   # Terminal 1 - Backend (puerto 3001)
-   cd backend
-   PORT=3001 npm run dev
-   
-   # Terminal 2 - Frontend (puerto 5174)
-   cd frontend
-   npm run dev -- --port 5174
-   ```
+⚠️ **Importante:** Cambiar estas credenciales en producción.
 
 ## 📁 Estructura del Proyecto
 
 ```
 cursorflorka1/
-├── backend/                 # API del servidor
+├── backend/
 │   ├── src/
-│   │   ├── controllers/     # Lógica de controladores
-│   │   ├── middleware/      # Middleware personalizado
-│   │   ├── routes/         # Definición de rutas
-│   │   ├── utils/          # Utilidades y validaciones
-│   │   └── app.ts          # Configuración de Express
-│   ├── prisma/             # Esquemas y migraciones de DB
-│   ├── .env.example        # Variables de entorno de ejemplo
+│   │   ├── controllers/
+│   │   ├── middleware/
+│   │   ├── routes/
+│   │   ├── utils/
+│   │   └── app.ts
+│   ├── prisma/
+│   │   └── schema.prisma
+│   ├── Dockerfile
 │   └── package.json
-├── frontend/               # Aplicación React
+├── frontend/
 │   ├── src/
-│   │   ├── components/     # Componentes reutilizables
-│   │   ├── contexts/       # Contextos de React
-│   │   ├── hooks/          # Hooks personalizados
-│   │   ├── pages/          # Páginas de la aplicación
-│   │   ├── services/       # Servicios API
-│   │   └── App.jsx         # Componente principal
+│   │   ├── components/
+│   │   ├── pages/
+│   │   ├── contexts/
+│   │   ├── hooks/
+│   │   ├── services/
+│   │   └── utils/
+│   ├── Dockerfile
 │   └── package.json
-├── docker-compose.yml      # Configuración de Docker (puertos modificados)
-└── README.md              # Este archivo
+├── docker-compose.yml
+├── api-collection.postman.json
+└── README.md
 ```
 
-## 🔧 Scripts Disponibles
+## 🔌 API Endpoints
+
+### Autenticación
+- `POST /api/auth/register` - Registro de usuario
+- `POST /api/auth/login` - Inicio de sesión
+- `POST /api/auth/admin/login` - Inicio de sesión admin
+- `GET /api/auth/profile` - Perfil del usuario
+- `POST /api/auth/logout` - Cerrar sesión
+
+### Proyectos
+- `GET /api/projects` - Listar proyectos
+- `POST /api/projects` - Crear proyecto
+- `GET /api/projects/:id` - Obtener proyecto
+- `PUT /api/projects/:id` - Actualizar proyecto
+- `DELETE /api/projects/:id` - Eliminar proyecto
+
+### Administración
+- `GET /api/admin/dashboard` - Dashboard admin
+- `GET /api/admin/users` - Gestión de usuarios
+- `GET /api/admin/projects` - Gestión de proyectos
+
+## 🧪 Testing
 
 ### Backend
 ```bash
-npm run dev          # Ejecutar en modo desarrollo
-npm run build        # Compilar TypeScript
-npm run start        # Ejecutar en producción
-npm run test         # Ejecutar tests
-npm run lint         # Linter ESLint
-npm run db:migrate   # Ejecutar migraciones
-npm run db:generate  # Generar cliente Prisma
+cd backend
+npm test
+npm run test:coverage
 ```
 
 ### Frontend
 ```bash
-npm run dev          # Servidor de desarrollo
-npm run build        # Build para producción
-npm run preview      # Preview del build
-npm run test         # Ejecutar tests
-npm run lint         # Linter ESLint
+cd frontend
+npm test
+npm run test:coverage
 ```
 
-## 🔐 Autenticación
+## 📊 Colección de Postman
 
-### Usuario Administrador por Defecto
-Al ejecutar el script `create-admin.js`, se crea un usuario administrador:
-- **Email**: admin@florka.com
-- **Contraseña**: admin123
+El archivo `api-collection.postman.json` contiene una colección completa de Postman con todos los endpoints configurados para el puerto 3001.
 
-### Endpoints de Autenticación
-- `POST /api/auth/register` - Registro de usuario
-- `POST /api/auth/login` - Inicio de sesión
-- `POST /api/auth/admin/login` - Inicio de sesión de admin
-- `GET /api/auth/profile` - Obtener perfil del usuario
-- `POST /api/auth/logout` - Cerrar sesión
+### Variables de Entorno en Postman:
+- `base_url`: http://localhost:3001
+- `access_token`: (se establece automáticamente tras login)
 
-## 📊 API Endpoints
+## 🔒 Seguridad
 
-### Proyectos
-- `GET /api/projects` - Listar proyectos
-- `GET /api/projects/public` - Proyectos públicos
-- `GET /api/projects/:id` - Obtener proyecto específico
-- `POST /api/projects` - Crear proyecto (autenticado)
-- `PUT /api/projects/:id` - Actualizar proyecto (propietario)
-- `DELETE /api/projects/:id` - Eliminar proyecto (propietario)
+- Contraseñas hasheadas con bcrypt
+- Autenticación JWT con tokens de acceso y refresh
+- Validación de entrada con Zod
+- Rate limiting implementado
+- Headers de seguridad con Helmet
+- CORS configurado
 
-### Administración
-- `GET /api/admin/dashboard/stats` - Estadísticas del dashboard
-- `GET /api/admin/users` - Gestión de usuarios
-- `GET /api/admin/projects` - Gestión de proyectos
-- `PUT /api/admin/users/:id/status` - Cambiar estado de usuario
-- `DELETE /api/admin/users/:id` - Eliminar usuario
+## 🌐 Variables de Entorno
+
+### Backend (.env)
+```env
+DATABASE_URL="postgresql://cursorflorka1_user:cursorflorka1_password@postgres:5432/cursorflorka1_db?schema=public"
+JWT_SECRET="cursorflorka1_jwt_secret_key_2024"
+JWT_REFRESH_SECRET="cursorflorka1_jwt_refresh_secret_key_2024"
+JWT_EXPIRES_IN="24h"
+JWT_REFRESH_EXPIRES_IN="7d"
+PORT=3001
+CORS_ORIGIN="http://localhost:5174"
+RATE_LIMIT_WINDOW_MS=900000
+RATE_LIMIT_MAX_REQUESTS=100
+ADMIN_EMAIL="admin@cursorflorka1.com"
+ADMIN_PASSWORD="admin123"
+BCRYPT_SALT_ROUNDS=12
+LOG_LEVEL="info"
+```
 
 ## 🐳 Docker
 
-### Comandos Útiles
+### Servicios Configurados
+
+1. **PostgreSQL** (puerto 5433)
+   - Base de datos: cursorflorka1_db
+   - Usuario: cursorflorka1_user
+   - Contraseña: cursorflorka1_password
+
+2. **Backend** (puerto 3001)
+   - Node.js con TypeScript
+   - Auto-restart en desarrollo
+
+3. **Frontend** (puerto 5174)
+   - React con Vite
+   - Hot reload habilitado
+
+### Comandos Docker Útiles
+
 ```bash
-# Levantar todos los servicios
+# Construir y ejecutar
+docker-compose up --build
+
+# Ejecutar en segundo plano
 docker-compose up -d
 
 # Ver logs
 docker-compose logs -f
-
-# Reconstruir imágenes
-docker-compose up --build
 
 # Parar servicios
 docker-compose down
@@ -246,27 +215,39 @@ docker-compose down
 docker-compose down -v
 ```
 
-### Servicios Docker (Puertos Modificados)
-- **frontend**: React app (puerto 5174)
-- **backend**: Node.js API (puerto 3001)
-- **postgres**: Base de datos PostgreSQL (puerto 5433)
+## 🔄 Diferencias con el Proyecto Original
 
-## 🔒 Seguridad
+### Puertos Modificados
+- Frontend: 5173 → **5174**
+- Backend: 3000 → **3001**
+- PostgreSQL: 5432 → **5433**
 
-### Medidas Implementadas
-- Hasheo de contraseñas con bcrypt (salt rounds: 12)
-- JWT con expiración y refresh tokens
-- Rate limiting en endpoints de autenticación
-- Validación de entrada con Zod
-- Headers de seguridad con Helmet
-- CORS configurado apropiadamente
-- Variables de entorno para secretos
+### Configuraciones Actualizadas
+- Base de datos: `cursorflorka1_db`
+- Contenedores: nombres únicos con prefijo `cursorflorka1`
+- Variables de entorno: valores únicos para evitar conflictos
+- Admin email: `admin@cursorflorka1.com`
 
-### Variables de Entorno Críticas
-```env
-JWT_SECRET=cursorflorka1_jwt_secret_muy_seguro
-JWT_REFRESH_SECRET=cursorflorka1_refresh_secret_muy_seguro
-DATABASE_URL=postgresql://cursorflorka1_user:cursorflorka1_password@localhost:5433/cursorflorka1_db
+## 📝 Desarrollo
+
+### Comandos de Desarrollo
+
+```bash
+# Instalar dependencias backend
+cd backend && npm install
+
+# Instalar dependencias frontend
+cd frontend && npm install
+
+# Ejecutar migraciones de Prisma
+cd backend && npx prisma migrate dev
+
+# Generar cliente Prisma
+cd backend && npx prisma generate
+
+# Ejecutar en modo desarrollo (sin Docker)
+cd backend && npm run dev
+cd frontend && npm run dev
 ```
 
 ## 🤝 Contribución
@@ -277,52 +258,28 @@ DATABASE_URL=postgresql://cursorflorka1_user:cursorflorka1_password@localhost:54
 4. Push a la rama (`git push origin feature/AmazingFeature`)
 5. Abre un Pull Request
 
-### Estándares de Código
-- Usar TypeScript para nuevas funcionalidades
-- Seguir las reglas de ESLint configuradas
-- Escribir tests para nuevas funcionalidades
-- Documentar funciones complejas
-- Usar commits descriptivos
-
-## 📝 Licencia
+## 📄 Licencia
 
 Este proyecto está bajo la Licencia MIT. Ver el archivo `LICENSE` para más detalles.
 
 ## 🆘 Soporte
 
-### Problemas Comunes
+Si encuentras algún problema o tienes preguntas:
 
-**Error de conexión a la base de datos**
-```bash
-# Verificar que PostgreSQL esté ejecutándose
-docker-compose ps
+1. Revisa la documentación
+2. Busca en los issues existentes
+3. Crea un nuevo issue si es necesario
 
-# Reiniciar servicios
-docker-compose restart
-```
+## 🎯 Roadmap
 
-**Problemas con migraciones**
-```bash
-# Resetear base de datos
-cd backend
-npx prisma migrate reset
-npx prisma migrate dev
-```
-
-**Puerto ya en uso**
-```bash
-# Los puertos están configurados para no chocar:
-# Frontend: 5174, Backend: 3001, PostgreSQL: 5433
-```
-
-### Contacto
-- **Desarrollador**: Cognos (Agente Desarrollador Full-Stack Senior)
-- **Repositorio Original**: https://github.com/Herocku2/florka-saas-platform
-- **Repositorio Clon**: https://github.com/Herocku2/cursorflorka1
-- **Issues**: https://github.com/Herocku2/cursorflorka1/issues
+- [ ] Implementar tests E2E
+- [ ] Añadir CI/CD pipeline
+- [ ] Implementar notificaciones en tiempo real
+- [ ] Añadir soporte para múltiples idiomas
+- [ ] Implementar sistema de roles avanzado
 
 ---
 
-**¡Gracias por usar CursorFlorka1 SaaS Platform!** 🚀
+**CursorFlorka1** - Una plataforma SaaS moderna y escalable 🚀
 
-Este proyecto es un clon completo que demuestra las mejores prácticas en desarrollo full-stack moderno, con un enfoque en seguridad, escalabilidad y mantenibilidad.
+*Desarrollado con ❤️ usando las mejores prácticas de desarrollo*
