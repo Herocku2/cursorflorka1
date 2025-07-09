@@ -1,56 +1,48 @@
-# 🚀 CursorFlorka1 SaaS Platform
+# 🚀 Florka1 SaaS Platform
 
-**CursorFlorka1** es un clon completo de la plataforma SaaS Florka, construida con tecnologías modernas y configurada con puertos únicos para evitar conflictos con el proyecto original.
+Florka1 es una plataforma SaaS completa construida con React, desarrollada originalmente con Anima y mejorada con funcionalidades modernas.
 
 ## 📋 Descripción del Proyecto
 
-Esta es una aplicación web SaaS completa que incluye:
-- Sistema de autenticación de usuarios
-- Gestión de proyectos
-- Panel de administración
-- API RESTful robusta
-- Interfaz de usuario moderna y responsiva
+Esta es una aplicación web completa que incluye:
+
+- Interfaz de usuario moderna y responsiva con React
+- Componentes reutilizables y modulares
+- Sistema de navegación con React Router
+- Storybook para documentación de componentes
+- Configuración Docker para desarrollo
 
 ## 🛠️ Stack Tecnológico
 
 ### Frontend
-- **React 18+** con TypeScript
-- **Vite** como bundler
-- **Tailwind CSS** para estilos
-- **React Router** para navegación
-- **Zustand** para gestión de estado
-- **Axios** para peticiones HTTP
-
-### Backend
-- **Node.js** con TypeScript
-- **Express.js** como framework
-- **Prisma** como ORM
-- **PostgreSQL** como base de datos
-- **JWT** para autenticación
-- **bcrypt** para hash de contraseñas
+- **React 18+** - Biblioteca de interfaz de usuario
+- **React Router DOM** - Navegación y enrutamiento
+- **Vite** - Bundler y servidor de desarrollo
+- **Storybook** - Documentación de componentes
+- **PropTypes** - Validación de tipos
 
 ### DevOps
-- **Docker** y **Docker Compose**
-- **ESLint** y **Prettier**
-- **Jest** y **Vitest** para testing
+- **Docker** y **Docker Compose** - Contenerización
+- **Vite** - Servidor de desarrollo rápido
 
-## 🔧 Configuración de Puertos (Modificados)
+## 🔧 Configuración de Puertos
 
-Para evitar conflictos con el proyecto original, CursorFlorka1 utiliza puertos diferentes:
+Para evitar conflictos con otros proyectos, Florka1 utiliza puertos específicos:
 
-| Servicio | Puerto Original | Puerto CursorFlorka1 |
-|----------|----------------|----------------------|
-| Frontend | 5173 | **5174** |
-| Backend | 3000 | **3001** |
-| PostgreSQL | 5432 | **5433** |
+| Servicio | Puerto |
+|----------|--------|
+| Frontend | 5175 |
+| PostgreSQL | 5434 |
+| Storybook | 6006 |
 
 ## 🚀 Instalación y Ejecución
 
 ### Prerrequisitos
 - Docker y Docker Compose instalados
+- Node.js 18+ (para desarrollo local)
 - Git
 
-### Pasos de Instalación
+### Opción 1: Con Docker (Recomendado)
 
 1. **Clonar el repositorio:**
 ```bash
@@ -64,137 +56,101 @@ docker-compose up --build
 ```
 
 3. **Acceder a la aplicación:**
-- **Frontend:** http://localhost:5174
-- **Backend API:** http://localhost:3001
-- **Health Check:** http://localhost:3001/health
+- Frontend: http://localhost:5175
+- Storybook: http://localhost:6006
 
-## 🔐 Credenciales por Defecto
+### Opción 2: Desarrollo Local
 
-### Usuario Administrador
-- **Email:** admin@cursorflorka1.com
-- **Contraseña:** admin123
+1. **Instalar dependencias:**
+```bash
+npm install
+```
 
-⚠️ **Importante:** Cambiar estas credenciales en producción.
+2. **Ejecutar en modo desarrollo:**
+```bash
+npm run dev
+```
+
+3. **Ejecutar Storybook:**
+```bash
+npm run storybook
+```
+
+4. **Construir para producción:**
+```bash
+npm run build
+```
 
 ## 📁 Estructura del Proyecto
 
 ```
-cursorflorka1/
-├── backend/
-│   ├── src/
-│   │   ├── controllers/
-│   │   ├── middleware/
-│   │   ├── routes/
-│   │   ├── utils/
-│   │   └── app.ts
-│   ├── prisma/
-│   │   └── schema.prisma
-│   ├── Dockerfile
-│   └── package.json
-├── frontend/
-│   ├── src/
-│   │   ├── components/
-│   │   ├── pages/
-│   │   ├── contexts/
-│   │   ├── hooks/
-│   │   ├── services/
-│   │   └── utils/
-│   ├── Dockerfile
-│   └── package.json
-├── docker-compose.yml
-├── api-collection.postman.json
-└── README.md
+florka1/
+├── src/
+│   ├── components/          # Componentes reutilizables
+│   │   ├── BanerDetelleToken/
+│   │   ├── BanerMovil/
+│   │   ├── Boton/
+│   │   ├── Heder/
+│   │   ├── Menu/
+│   │   └── ...
+│   ├── screens/             # Pantallas/Páginas principales
+│   │   ├── Create/
+│   │   ├── Home*/
+│   │   ├── Publish/
+│   │   ├── Vote/
+│   │   └── ...
+│   ├── icons/               # Iconos y logos
+│   ├── App.jsx             # Componente principal
+│   └── index.jsx           # Punto de entrada
+├── static/
+│   ├── img/                # Imágenes estáticas
+│   └── _redirects          # Configuración de redirects
+├── .storybook/             # Configuración de Storybook
+├── estrella/               # Assets específicos
+├── docker-compose.yml      # Configuración Docker
+├── Dockerfile.frontend     # Dockerfile para frontend
+├── package.json           # Dependencias y scripts
+├── vite.config.js         # Configuración de Vite
+└── README.md              # Este archivo
 ```
 
-## 🔌 API Endpoints
+## 🎨 Componentes Principales
 
-### Autenticación
-- `POST /api/auth/register` - Registro de usuario
-- `POST /api/auth/login` - Inicio de sesión
-- `POST /api/auth/admin/login` - Inicio de sesión admin
-- `GET /api/auth/profile` - Perfil del usuario
-- `POST /api/auth/logout` - Cerrar sesión
+### Componentes de UI
+- **Boton/BotonSOL** - Botones personalizados
+- **Heder** - Encabezado de la aplicación
+- **Menu/MenuTabla** - Sistemas de navegación
+- **TarjetaProyectos/TarjetaRanking** - Cards de contenido
 
-### Proyectos
-- `GET /api/projects` - Listar proyectos
-- `POST /api/projects` - Crear proyecto
-- `GET /api/projects/:id` - Obtener proyecto
-- `PUT /api/projects/:id` - Actualizar proyecto
-- `DELETE /api/projects/:id` - Eliminar proyecto
+### Pantallas
+- **HomeAll/HomeNew/HomeNext** - Pantallas de inicio
+- **Create/Publish** - Creación y publicación
+- **Vote** - Sistema de votación
+- **Swap** - Intercambio de tokens
 
-### Administración
-- `GET /api/admin/dashboard` - Dashboard admin
-- `GET /api/admin/users` - Gestión de usuarios
-- `GET /api/admin/projects` - Gestión de proyectos
+## 📚 Storybook
 
-## 🧪 Testing
+Para ver la documentación de componentes:
 
-### Backend
 ```bash
-cd backend
-npm test
-npm run test:coverage
+npm run storybook
 ```
 
-### Frontend
-```bash
-cd frontend
-npm test
-npm run test:coverage
-```
-
-## 📊 Colección de Postman
-
-El archivo `api-collection.postman.json` contiene una colección completa de Postman con todos los endpoints configurados para el puerto 3001.
-
-### Variables de Entorno en Postman:
-- `base_url`: http://localhost:3001
-- `access_token`: (se establece automáticamente tras login)
-
-## 🔒 Seguridad
-
-- Contraseñas hasheadas con bcrypt
-- Autenticación JWT con tokens de acceso y refresh
-- Validación de entrada con Zod
-- Rate limiting implementado
-- Headers de seguridad con Helmet
-- CORS configurado
-
-## 🌐 Variables de Entorno
-
-### Backend (.env)
-```env
-DATABASE_URL="postgresql://cursorflorka1_user:cursorflorka1_password@postgres:5432/cursorflorka1_db?schema=public"
-JWT_SECRET="cursorflorka1_jwt_secret_key_2024"
-JWT_REFRESH_SECRET="cursorflorka1_jwt_refresh_secret_key_2024"
-JWT_EXPIRES_IN="24h"
-JWT_REFRESH_EXPIRES_IN="7d"
-PORT=3001
-CORS_ORIGIN="http://localhost:5174"
-RATE_LIMIT_WINDOW_MS=900000
-RATE_LIMIT_MAX_REQUESTS=100
-ADMIN_EMAIL="admin@cursorflorka1.com"
-ADMIN_PASSWORD="admin123"
-BCRYPT_SALT_ROUNDS=12
-LOG_LEVEL="info"
-```
+Accede a: http://localhost:6006
 
 ## 🐳 Docker
 
 ### Servicios Configurados
 
-1. **PostgreSQL** (puerto 5433)
-   - Base de datos: cursorflorka1_db
-   - Usuario: cursorflorka1_user
-   - Contraseña: cursorflorka1_password
+1. **PostgreSQL (puerto 5434)**
+   - Base de datos: `florka1_db`
+   - Usuario: `florka1_user`
+   - Contraseña: `florka1_password`
 
-2. **Backend** (puerto 3001)
-   - Node.js con TypeScript
-   - Auto-restart en desarrollo
-
-3. **Frontend** (puerto 5174)
+2. **Frontend (puerto 5175)**
    - React con Vite
    - Hot reload habilitado
+   - Healthcheck configurado
 
 ### Comandos Docker Útiles
 
@@ -215,40 +171,31 @@ docker-compose down
 docker-compose down -v
 ```
 
-## 🔄 Diferencias con el Proyecto Original
+## 🔄 Scripts Disponibles
 
-### Puertos Modificados
-- Frontend: 5173 → **5174**
-- Backend: 3000 → **3001**
-- PostgreSQL: 5432 → **5433**
+- `npm run dev` - Servidor de desarrollo
+- `npm run build` - Construir para producción
+- `npm run storybook` - Ejecutar Storybook
+- `npm run build-storybook` - Construir Storybook
 
-### Configuraciones Actualizadas
-- Base de datos: `cursorflorka1_db`
-- Contenedores: nombres únicos con prefijo `cursorflorka1`
-- Variables de entorno: valores únicos para evitar conflictos
-- Admin email: `admin@cursorflorka1.com`
+## 🌟 Características
+
+- ✅ Interfaz moderna y responsiva
+- ✅ Componentes modulares y reutilizables
+- ✅ Documentación con Storybook
+- ✅ Configuración Docker completa
+- ✅ Hot reload en desarrollo
+- ✅ Optimización con Vite
+- ✅ Puertos únicos para evitar conflictos
 
 ## 📝 Desarrollo
 
-### Comandos de Desarrollo
+Este proyecto fue generado originalmente por [Anima](https://animaapp.com/) y ha sido mejorado con:
 
-```bash
-# Instalar dependencias backend
-cd backend && npm install
-
-# Instalar dependencias frontend
-cd frontend && npm install
-
-# Ejecutar migraciones de Prisma
-cd backend && npx prisma migrate dev
-
-# Generar cliente Prisma
-cd backend && npx prisma generate
-
-# Ejecutar en modo desarrollo (sin Docker)
-cd backend && npm run dev
-cd frontend && npm run dev
-```
+- Configuración Docker personalizada
+- Puertos únicos para desarrollo paralelo
+- Documentación completa
+- Estructura de proyecto optimizada
 
 ## 🤝 Contribución
 
@@ -260,26 +207,8 @@ cd frontend && npm run dev
 
 ## 📄 Licencia
 
-Este proyecto está bajo la Licencia MIT. Ver el archivo `LICENSE` para más detalles.
-
-## 🆘 Soporte
-
-Si encuentras algún problema o tienes preguntas:
-
-1. Revisa la documentación
-2. Busca en los issues existentes
-3. Crea un nuevo issue si es necesario
-
-## 🎯 Roadmap
-
-- [ ] Implementar tests E2E
-- [ ] Añadir CI/CD pipeline
-- [ ] Implementar notificaciones en tiempo real
-- [ ] Añadir soporte para múltiples idiomas
-- [ ] Implementar sistema de roles avanzado
+Este proyecto está bajo la Licencia MIT - ver el archivo [LICENSE](LICENSE) para detalles.
 
 ---
 
-**CursorFlorka1** - Una plataforma SaaS moderna y escalable 🚀
-
-*Desarrollado con ❤️ usando las mejores prácticas de desarrollo*
+**Desarrollado con ❤️ usando React y Vite**

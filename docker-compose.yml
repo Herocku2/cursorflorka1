@@ -4,84 +4,41 @@ services:
   # PostgreSQL Database
   postgres:
     image: postgres:15-alpine
-    container_name: cursorflorka1_postgres
+    container_name: florka1_postgres
     environment:
-      POSTGRES_DB: cursorflorka1_db
-      POSTGRES_USER: cursorflorka1_user
-      POSTGRES_PASSWORD: cursorflorka1_password
+      POSTGRES_DB: florka1_db
+      POSTGRES_USER: florka1_user
+      POSTGRES_PASSWORD: florka1_password
     ports:
-      - "5433:5432"
+      - "5434:5432"
     volumes:
-      - cursorflorka1_postgres_data:/var/lib/postgresql/data
-      - ./backend/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - florka1_postgres_data:/var/lib/postgresql/data
     networks:
-      - cursorflorka1_network
+      - florka1_network
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U cursorflorka1_user -d cursorflorka1_db"]
+      test: ["CMD-SHELL", "pg_isready -U florka1_user -d florka1_db"]
       interval: 10s
       timeout: 5s
       retries: 5
 
-  # Backend API
-  backend:
-    build:
-      context: ./backend
-      dockerfile: Dockerfile
-    container_name: cursorflorka1_backend
-    environment:
-      NODE_ENV: development
-      PORT: 3000
-      DATABASE_URL: postgresql://cursorflorka1_user:cursorflorka1_password@postgres:5432/cursorflorka1_db
-      JWT_SECRET: cursorflorka1_super_secret_jwt_key_change_in_production
-      JWT_REFRESH_SECRET: cursorflorka1_super_secret_refresh_key_change_in_production
-      JWT_EXPIRES_IN: 1h
-      JWT_REFRESH_EXPIRES_IN: 7d
-      CORS_ORIGIN: http://localhost:5174
-      RATE_LIMIT_WINDOW_MS: 900000
-      RATE_LIMIT_MAX_REQUESTS: 100
-    ports:
-      - "3001:3000"
-    volumes:
-      - ./backend:/app
-      - /app/node_modules
-      - /app/dist
-    depends_on:
-      postgres:
-        condition: service_healthy
-    networks:
-      - cursorflorka1_network
-    command: >
-      sh -c "npm run db:migrate &&
-             npm run db:generate &&
-             node create-admin.js &&
-             npm run dev"
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:3000/api/health"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 40s
-
   # Frontend React App
   frontend:
     build:
-      context: ./frontend
-      dockerfile: Dockerfile
-    container_name: cursorflorka1_frontend
+      context: .
+      dockerfile: Dockerfile.frontend
+    container_name: florka1_frontend
     environment:
-      VITE_API_URL: http://localhost:3001/api
-      VITE_APP_NAME: CursorFlorka1 SaaS Platform
+      VITE_API_URL: http://localhost:3002/api
+      VITE_APP_NAME: Florka1 SaaS Platform
       VITE_APP_VERSION: 1.0.0
     ports:
-      - "5174:5173"
+      - "5175:5173"
     volumes:
-      - ./frontend:/app
+      - .:/app
       - /app/node_modules
       - /app/dist
-    depends_on:
-      - backend
     networks:
-      - cursorflorka1_network
+      - florka1_network
     command: npm run dev -- --host 0.0.0.0
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:5173"]
@@ -91,12 +48,12 @@ services:
       start_period: 20s
 
 volumes:
-  cursorflorka1_postgres_data:
+  florka1_postgres_data:
     driver: local
 
 networks:
-  cursorflorka1_network:
+  florka1_network:
     driver: bridge
     ipam:
       config:
-        - subnet: 172.21.0.0/16
+        - subnet: 172.22.0.0/16
